@@ -61,4 +61,11 @@ public class HeroTest {
         assertTrue(Hero.getAll().contains(hero));
         assertTrue(Hero.getAll().contains(otherHero));
     }
+
+    @Test
+    public void getId_heroesInstantiatesWithAnID() throws Exception {
+        Hero.clearAllHeroes();
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        assertEquals(1, hero.getId());
+    }
 }
