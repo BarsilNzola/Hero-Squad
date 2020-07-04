@@ -21,4 +21,28 @@ public class HeroTest {
         Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
         assertEquals(true, hero instanceof Hero);
     }
+
+    @Test
+    public void newHeroObject_getsHeroName() {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        assertEquals("Barsil", hero.getName());
+    }
+
+    @Test
+    public void newHeroObject_getsHeroAge() {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        assertEquals(25, hero.getAge());
+    }
+
+    @Test
+    public void newHeroObject_getsHeroPower() {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        assertEquals("Death Ray", hero.getPower());
+    }
+
+    @Test
+    public void newHeroObject_getsHeroWeakness() {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        assertEquals("Food", hero.getWeakness());
+    }
 }

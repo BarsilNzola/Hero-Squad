@@ -12,4 +12,20 @@ public class Hero {
         this.power = power;
         this.weakness = weakness;
     }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public int getAge(){
+        return this.age;
+    }
+
+    public String getPower(){
+        return this.power;
+    }
+
+    public String getWeakness(){
+        return this.weakness;
+    }
 }
