@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/heros/new", (request, response) -> {
+        post("/heroes/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             String name = request.queryParams("name");
             int age = Integer.parseInt(request.queryParams("age"));
@@ -23,6 +24,13 @@ public class App {
             String weakness = request.queryParams("weakness");
             Hero newHero = new Hero(name, age, power, weakness);
             return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            ArrayList<Hero> heroes = Hero.getAll();
+            model.put("heroes", heroes);
+            return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
     }
 }
