@@ -68,4 +68,17 @@ public class HeroTest {
         Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
         assertEquals(1, hero.getId());
     }
+
+    @Test
+    public void findReturnsCorrectHero() throws Exception {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        assertEquals(1, Hero.findById(hero.getId()).getId());
+    }
+
+    @Test
+    public void findReturnsCorrectHero_moreThanOneHero() {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        Hero otherHero = new Hero("Adrian", 7, "Super Speed", "Sleep");
+        assertEquals(2, Hero.findById(otherHero.getId()).getId());
+    }
 }
