@@ -13,7 +13,8 @@ public class HeroTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
+        Hero.clearAllHeroes();
     }
 
     @Test
@@ -44,5 +45,20 @@ public class HeroTest {
     public void newHeroObject_getsHeroWeakness() {
         Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
         assertEquals("Food", hero.getWeakness());
+    }
+
+    @Test
+    public void newHeroObject_allHeroesAreCorrectlyReturned() {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food"); 
+        Hero otherHero = new Hero("Adrian", 7, "Super Speed", "Sleep");
+        assertEquals(2, Hero.getAll().size());
+    }
+
+    @Test
+    public void newHeroObject_allHeroesContainAllHeroes_true() {
+        Hero hero = new Hero("Barsil", 25, "Death Ray", "Food");
+        Hero otherHero = new Hero("Adrian", 7, "Super Speed", "Sleep");
+        assertTrue(Hero.getAll().contains(hero));
+        assertTrue(Hero.getAll().contains(otherHero));
     }
 }

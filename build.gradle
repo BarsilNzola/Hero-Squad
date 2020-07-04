@@ -6,6 +6,8 @@ plugins {
 group 'com.barsiljohn.hero-squad'
 version '1.0-SNAPSHOT'
 
+mainClassName = 'App'
+
 sourceCompatibility = 1.8
 
 repositories {
