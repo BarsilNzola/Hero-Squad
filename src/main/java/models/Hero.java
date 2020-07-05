@@ -9,7 +9,6 @@ public class Hero {
     private int age;
     private String power;
     private String weakness;
-    private static ArrayList<Hero> instances = new ArrayList<>();
     private int id;
 
     public Hero(String name,String nickname, int age, String power, String weakness){
@@ -18,8 +17,6 @@ public class Hero {
         this.age = age;
         this.power = power;
         this.weakness = weakness;
-        instances.add(this);
-        this.id = instances.size();
     }
 
     @Override
@@ -84,24 +81,8 @@ public class Hero {
         return this.weakness;
     }
 
-    public static ArrayList<Hero> getAll(){
-        return instances;
-    }
-
-    public static void clearAllHeroes(){
-        instances.clear();
-    }
 
     public int getId() {
         return id;
-    }
-
-    public static Hero findById(int id){
-        return instances.get(id-1);
-    }
-
-
-    public void deleteHero() {
-        instances.remove(id-1);
     }
 }
