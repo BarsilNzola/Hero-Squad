@@ -2,7 +2,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+import dao.Sql2oHeroDao;
 import models.Hero;
+import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
@@ -10,11 +12,14 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
+        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        Sql2oHeroDao heroDao = new Sql2oHeroDao(sql2o);
 
         //delete All Heroes
         get("/heroes/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            Hero.clearAllHeroes();
+            heroDao.clearAllHeroes();
             response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -23,8 +28,7 @@ public class App {
         get("/heroes/heroes/:id/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfHeroToDelete = Integer.parseInt(request.params("id"));
-            Hero deleteHero = Hero.findById(idOfHeroToDelete);
-            deleteHero.deleteHero();
+            heroDao.deleteById(idOfHeroToDelete);
             response.redirect( "/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -60,7 +64,7 @@ public class App {
         get("/heroes/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfHeroToFind = Integer.parseInt(request.params(":id"));
-            Hero foundHero = Hero.findById(idOfHeroToFind);
+            Hero foundHero = heroDao.findById(idOfHeroToFind);
             model.put("hero", foundHero);
             return new ModelAndView(model, "hero-dossier.hbs");
         },new HandlebarsTemplateEngine());
