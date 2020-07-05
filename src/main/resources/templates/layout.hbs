@@ -1,23 +1,34 @@
-{{#block "header"}}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{#block "title"}}Hero Squad{{/block}}</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Hero Squad</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="/heroes">See All Heroes</a></li>
+      <li><a href="/heroes/new">Add New Hero</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+   <!--begin main template-->
+   <div class="page-header">
+       <img src="/images/heroes.jpg" width="100%" height="300px;">
+       <h1>Welcome to the Force. <small>With Great Power Comes Great Responsibility!</small></h1>
+   </div>
 
-   <!doctype html>
-   <html lang="en">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport"
-             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-       <title>{{#block "title"}}Hero Squad{{/block}}</title>
-       <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-       <link rel="stylesheet" href="/app.css">
-   </head>
-   <body>
-{{/block}}
-<div class="page">
-{{#block "content"}}
+    <div class="col-md-12">
+           {{#block "content"}}
+           {{/block}}
 
-{{/block}}
-
+    </div>
 {{#block "footer"}}
    </div>
    </body>
