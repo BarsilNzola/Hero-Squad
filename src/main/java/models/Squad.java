@@ -5,13 +5,13 @@ import java.util.Objects;
 public class Squad {
     private String name;
     private String cause;
-    private int size;
+    private int squadSize;
     private int id;
 
     public Squad (String name, String cause, int size, int id){
         this.name = name;
         this.cause = cause;
-        this.size = size;
+        this.squadSize = squadSize;
         this.id = id;
     }
 
@@ -20,14 +20,14 @@ public class Squad {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Squad squad = (Squad) o;
-        return size == squad.size &&
+        return squadSize == squad.squadSize &&
                 name.equals(squad.name) &&
                 cause.equals(squad.cause);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, cause, size);
+        return Objects.hash(name, cause, squadSize);
     }
 
     public String getName() {
@@ -47,10 +47,10 @@ public class Squad {
     }
 
     public int getSize() {
-        return size;
+        return squadSize;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setSize(int squadSize) {
+        this.squadSize = squadSize;
     }
 }
