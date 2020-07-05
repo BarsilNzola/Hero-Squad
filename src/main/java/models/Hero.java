@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Hero {
     private String name;
@@ -19,6 +20,48 @@ public class Hero {
         this.weakness = weakness;
         instances.add(this);
         this.id = instances.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hero hero = (Hero) o;
+        return age == hero.age &&
+                id == hero.id &&
+                name.equals(hero.name) &&
+                nickname.equals(hero.nickname) &&
+                power.equals(hero.power) &&
+                weakness.equals(hero.weakness);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, nickname, age, power, weakness, id);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setPower(String power) {
+        this.power = power;
+    }
+
+    public void setWeakness(String weakness) {
+        this.weakness = weakness;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName(){
@@ -56,6 +99,7 @@ public class Hero {
     public static Hero findById(int id){
         return instances.get(id-1);
     }
+
 
     public void deleteHero() {
         instances.remove(id-1);
