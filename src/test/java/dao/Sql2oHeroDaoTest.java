@@ -44,4 +44,23 @@ public class Sql2oHeroDaoTest {
         Hero foundHero = heroDao.findById(hero.getId());
         assertEquals(hero, foundHero);
     }
+
+    @Test
+    public void deleteByIdDeletesHero() {
+        Hero hero = new Hero("Barsil", "The Forever Knights", 25, "Death Ray", "Food");
+        heroDao.add(hero);
+        heroDao.deleteById(hero.getId());
+        assertEquals(0,heroDao.getAll().size());
+    }
+
+    @Test
+    public void clearAllclearsAllHeroes() {
+        Hero hero = new Hero("Barsil", "The Forever Knights", 25, "Death Ray", "Food");
+        Hero otherHero = new Hero("Adrian", "Ngwala", 7, "Super Speed", "Sleep");
+        heroDao.add(hero);
+        heroDao.add(otherHero);
+        int daoSize = heroDao.getAll().size();
+        heroDao.clearAllHeroes();
+        assertTrue(daoSize > 0 && daoSize > heroDao.getAll().size());
+    }
 }
