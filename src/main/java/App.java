@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -48,7 +49,7 @@ public class App {
             String power = request.queryParams("power");
             String weakness = request.queryParams("weakness");
             Hero newHero = new Hero(name, nickname, age, power, weakness);
-            model.put("hero", newHero);
+            heroDao.add(newHero);
             response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -56,7 +57,7 @@ public class App {
         //list all heroes
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            ArrayList<Hero> heroes = Hero.getAll();
+            List<Hero> heroes = heroDao.getAll();
             model.put("heroes", heroes);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());

@@ -14,7 +14,6 @@ public class HeroTest {
 
     @After
     public void tearDown() {
-        Hero.clearAllHeroes();
     }
 
     @Test
