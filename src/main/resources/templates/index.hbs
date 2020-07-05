@@ -11,10 +11,9 @@
 
             {{#if heroes}}
                 {{#each heroes}}
-                <p>{{name}}</p>
-                <p>{{age}}</p>
-                <p>{{power}}</p>
-                <p>{{weakness}}</p>
+                <ul>
+                    <li>{{name}} <br> <a href = "/heroes/{{id}}">Hero Dossier....</a></li>
+                </ul>
                 {{/each}}
             {{else}}
             <p>No Heroes Enlisted!</p>
