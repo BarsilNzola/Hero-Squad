@@ -89,11 +89,19 @@ public class HeroTest {
     }
 
     @Test
-    public void deleteHero() {
+    public void heroDeletion_deleteHero() {
         Hero hero = new Hero("Barsil", "The Forever Knights", 25, "Death Ray", "Food");
         Hero otherHero = new Hero("Adrian", "Ngwala", 7, "Super Speed", "Sleep");
         hero.deleteHero();
         assertEquals(1, Hero.getAll().size());
         assertEquals(Hero.getAll().get(0).getId(),2);
+    }
+
+    @Test
+    public void allHeroesDeletion_clearAllHeroes() {
+        Hero hero = new Hero("Barsil", "The Forever Knights", 25, "Death Ray", "Food");
+        Hero otherHero = new Hero("Adrian", "Ngwala", 7, "Super Speed", "Sleep");
+        Hero.clearAllHeroes();
+        assertEquals(0,Hero.getAll().size());
     }
 }

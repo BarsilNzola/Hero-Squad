@@ -11,6 +11,14 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
 
+        //delete All Heroes
+        get("/heroes/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            Hero.clearAllHeroes();
+            response.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
         //delete Hero
         get("/heroes/heroes/:id/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
