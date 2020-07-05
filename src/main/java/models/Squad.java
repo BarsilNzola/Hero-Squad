@@ -6,11 +6,13 @@ public class Squad {
     private String name;
     private String cause;
     private int size;
+    private int id;
 
-    public Squad (String name, String cause, int size){
+    public Squad (String name, String cause, int size, int id){
         this.name = name;
         this.cause = cause;
         this.size = size;
+        this.id = id;
     }
 
     @Override
