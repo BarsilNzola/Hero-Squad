@@ -46,5 +46,14 @@ public class App {
             model.put("hero", foundHero);
             return new ModelAndView(model, "hero-dossier.hbs");
         },new HandlebarsTemplateEngine());
+
+        //delete Hero
+        get("/heroes/:id/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfHeroToDelete = Integer.parseInt(request.params("id"));
+            Hero deleteHero = Hero.findById(idOfHeroToDelete);
+            deleteHero.deleteHero();
+            return new ModelAndView(model, "/");
+        }, new HandlebarsTemplateEngine());
     }
 }
