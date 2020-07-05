@@ -21,10 +21,11 @@ public class App {
         post("/heroes", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             String name = request.queryParams("name");
+            String nickname = request.queryParams("nickname");
             int age = Integer.parseInt(request.queryParams("age"));
             String power = request.queryParams("power");
             String weakness = request.queryParams("weakness");
-            Hero newHero = new Hero(name, age, power, weakness);
+            Hero newHero = new Hero(name, nickname, age, power, weakness);
             model.put("hero", newHero);
             response.redirect("/");
             return null;
