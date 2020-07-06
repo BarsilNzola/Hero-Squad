@@ -15,7 +15,7 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        String connectionString = "jdbc:h2:~/herosquad.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         Sql2o sql2o = new Sql2o(connectionString, "", "");
         Sql2oHeroDao heroDao = new Sql2oHeroDao(sql2o);
         Sql2oSquadDao squadDao = new Sql2oSquadDao(sql2o);
@@ -115,6 +115,8 @@ public class App {
         // form to add new hero
         get("/heroes/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
+            List<Squad> squads = squadDao.getAll();
+            model.put("squads", squads);
             return new ModelAndView(model, "newhero-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -134,6 +136,19 @@ public class App {
             response.redirect("/");
             return null;
        }, new HandlebarsTemplateEngine());
+
+        //get: show an individual hero that is nested in a squad
+        get("/squads/:squad_id/heroes/:hero_id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfHeroToFind = Integer.parseInt(request.params("hero_id")); //pull id - must match route segment
+            Hero foundHero = heroDao.findById(idOfHeroToFind); //use it to find hero
+            int idOfSquadToFind = Integer.parseInt(request.params("squad_id"));
+            Squad foundSquad = squadDao.findById(idOfSquadToFind);
+            model.put("squad", foundSquad);
+            model.put("hero", foundHero); //add it to model for template to display
+            model.put("squads", squadDao.getAll()); //refresh list of links for navbar
+            return new ModelAndView(model, "hero-dossier.hbs"); //individual task page.
+        }, new HandlebarsTemplateEngine());
 
         //list all heroes
         get("/", (request, response) -> {

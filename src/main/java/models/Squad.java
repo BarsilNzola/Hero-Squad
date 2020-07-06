@@ -20,13 +20,14 @@ public class Squad {
         if (o == null || getClass() != o.getClass()) return false;
         Squad squad = (Squad) o;
         return squadSize == squad.squadSize &&
+                id == squad.id &&
                 name.equals(squad.name) &&
                 cause.equals(squad.cause);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, cause, squadSize);
+        return Objects.hash(name, cause, squadSize, id);
     }
 
     public String getName() {
