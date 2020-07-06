@@ -8,11 +8,10 @@ public class Squad {
     private int squadSize;
     private int id;
 
-    public Squad (String name, String cause, int size, int id){
+    public Squad (String name, String cause, int squadSize){
         this.name = name;
         this.cause = cause;
         this.squadSize = squadSize;
-        this.id = id;
     }
 
     @Override
@@ -31,26 +30,42 @@ public class Squad {
     }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     public String getCause() {
+
         return cause;
     }
 
     public void setCause(String cause) {
+
         this.cause = cause;
     }
 
-    public int getSize() {
+    public int getsquadSize() {
+
         return squadSize;
     }
 
     public void setSize(int squadSize) {
+
         this.squadSize = squadSize;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public void setId(int id) {
+
+        this.id = id;
     }
 }

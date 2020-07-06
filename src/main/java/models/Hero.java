@@ -10,13 +10,23 @@ public class Hero {
     private String power;
     private String weakness;
     private int id;
+    private int squadId;
 
-    public Hero(String name,String nickname, int age, String power, String weakness){
+    public Hero(String name,String nickname, int age, String power, String weakness, int squadId){
         this.name = name;
         this.nickname = nickname;
         this.age = age;
         this.power = power;
         this.weakness = weakness;
+        this.squadId = squadId;
+    }
+
+    public int getSquadId() {
+        return squadId;
+    }
+
+    public void setSquadId(int squadId) {
+        this.squadId = squadId;
     }
 
     @Override
@@ -60,6 +70,7 @@ public class Hero {
     public void setId(int id) {
         this.id = id;
     }
+
 
     public String getName(){
         return this.name;

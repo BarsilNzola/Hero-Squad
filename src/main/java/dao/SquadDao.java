@@ -1,5 +1,6 @@
 package dao;
 
+import models.Hero;
 import models.Squad;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public interface SquadDao {
 
     //READ
     Squad findById(int id);
+    List<Hero>getAllHeroesBySquad(int squadId);
 
     //UPDATE
     void update(int id, String name, String cause, int squadSize);
