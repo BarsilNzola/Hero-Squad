@@ -1,8 +1,16 @@
 {{#partial "content"}}
    <p>HERO DOSSIER:</p>
         <ul>
-            <li>{{ hero.age }}</li>
-            <a href="heroes/{{hero.id}}/delete">REMOVE HERO</a>
+            <li>
+            <p>Hero Name:{{hero.name}}</p>
+            <p>Squad:{{squad.name}}</p>
+            <p>Hero Nickname:{{hero.nickName}}</p>
+            <p>Hero's Age:{{hero.age}}</p>
+            <p>Power:{{hero.power}}</p>
+            <p>Weakness:{{ hero.weakness }}</p>
+            </li>
+            <a href="/squads/{{hero.squadId}}heroes/{{hero.id}}/delete">REMOVE HERO</a>
+        </ul>
 {{/partial}}
 
 {{> layout.hbs}}

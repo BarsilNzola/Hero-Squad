@@ -24,6 +24,14 @@
                     <label for="weakness">Weakness:</label>
                     <input id="weakness" name="weakness" class="form-control" type="text">
                 </div>
+                <div>
+                    <label for="squadId">Enter Hero's Squad</label>
+                    <select id="squadId" name="squadId">
+                        {{#each squads}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                    <p>Squad Not Found?<a href="/squads/new">Add New Squad</a></p>
                 <button type="submit" class="btn">Go!</button>
             </form>
             <!--form.hbs.-->

@@ -47,7 +47,16 @@ public class App {
             int squadSize = Integer.parseInt(request.queryParams("squadSize"));
             Squad newSquad = new Squad(name, cause, squadSize);
             squadDao.add(newSquad);
-            res.redirect("/");
+            response.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete all squads and all heroes
+        get("/squads/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            squadDao.clearAllSquads();
+            heroDao.clearAllHeroes();
+            response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
@@ -55,6 +64,41 @@ public class App {
         get("/heroes/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             heroDao.clearAllHeroes();
+            response.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: show a squad and heroes it contains
+        get("/squads/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfSquadToFind = Integer.parseInt(request.params("id")); //new
+            Squad foundSquad = squadDao.findById(idOfSquadToFind);
+            model.put("squad", foundSquad);
+            List<Hero> allHeroesBySquad = squadDao.getAllHeroesBySquad(idOfSquadToFind);
+            model.put("heroes", allHeroesBySquad);
+            model.put("squads", squadDao.getAll()); //refresh list of links for navbar
+            return new ModelAndView(model, "squad-detail.hbs"); //new
+        }, new HandlebarsTemplateEngine());
+
+        //get: show a form to update a squad
+        get("/squads/:id/edit", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("editSquad", true);
+            Squad squad = squadDao.findById(Integer.parseInt(request.params("id")));
+            model.put("squad", squad);
+            model.put("squads", squadDao.getAll()); //refresh list of links for navbar
+            return new ModelAndView(model, "squad-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        //post: process a form to update a squad
+        post("/squads/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfSquadToEdit = Integer.parseInt(request.params("id"));
+            String newName = request.queryParams("newSquadName");
+            String newCause = request.queryParams("newCause");
+            int newSquadSize = Integer.parseInt(request.queryParams("newSquadSize"));
+            squadDao.update(idOfSquadToEdit, newName, newCause, newSquadSize);
             response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -75,18 +119,21 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
        // process form input
-//        post("/heroes", (request, response) -> {
- //           Map<String, Object> model = new HashMap<String, Object>();
- //           String name = request.queryParams("name");
- //           String nickname = request.queryParams("nickname");
- //           int age = Integer.parseInt(request.queryParams("age"));
- //           String power = request.queryParams("power");
-//            String weakness = request.queryParams("weakness");
-//            Hero newHero = new Hero(name, nickname, age, power, weakness, squadId);
-//            heroDao.add(newHero);
- //           response.redirect("/");
- //           return null;
- //       }, new HandlebarsTemplateEngine());
+        post("/heroes", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            List<Squad> allSquads = squadDao.getAll();
+            model.put("squads", allSquads);
+            String name = request.queryParams("name");
+            String nickname = request.queryParams("nickname");
+            int age = Integer.parseInt(request.queryParams("age"));
+            String power = request.queryParams("power");
+            String weakness = request.queryParams("weakness");
+            int squadId = Integer.parseInt(request.queryParams("squadId"));
+            Hero newHero = new Hero(name, nickname, age, power, weakness, squadId);
+            heroDao.add(newHero);
+            response.redirect("/");
+            return null;
+       }, new HandlebarsTemplateEngine());
 
         //list all heroes
         get("/", (request, response) -> {

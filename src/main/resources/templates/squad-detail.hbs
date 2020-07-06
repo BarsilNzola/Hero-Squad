@@ -1,0 +1,19 @@
+{{#partial "content"}}
+   <h1>{{squad.name}}</h1>
+   <p>Here are all the heroes listed in this squad:</p>
+   <ul>
+       {{#each heroes}}
+           <li>
+               <p><a href="/squads/{{squad.id}}/heroes/{{id}}">{{name}}</a></p>
+               <p><a href="/squads/{{squad.id}}/heroes/{{id}}">{{nickName}}</a></p>
+               <p><a href="/squads/{{squad.id}}/heroes/{{id}}">{{age}}</a></p>
+               <p><a href="/squads/{{squad.id}}/heroes/{{id}}">{{power}}</a></p>
+               <p><a href="/squads/{{squad.id}}/heroes/{{id}}">{{weakness}}</a></p>
+           </li>
+       {{/each}}
+   </ul>
+   <a href="/squads/{{squad.id}}/edit">Edit this Squad</a><br>
+   <a href="/squads/{{squad.id}}/delete">DELETE THIS SQUAD</a>
+{{/partial}}
+
+{{> layout.hbs}}
