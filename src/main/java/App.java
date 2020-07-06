@@ -30,6 +30,27 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //show new squad form
+        get("/squad/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Squad> squads = squadDao.getAll(); //refresh list of links for navbar
+            model.put("squads", squads);
+            return new ModelAndView(model, "squad-form.hbs"); //new
+        }, new HandlebarsTemplateEngine());
+
+
+        //post: process new squad form
+        post("/squads", (request, response) -> { //new
+            Map<String, Object> model = new HashMap<>();
+            String name = request.queryParams("name");
+            String cause = request.queryParams("cause");
+            int squadSize = Integer.parseInt(request.queryParams("squadSize"));
+            Squad newSquad = new Squad(name, cause, squadSize);
+            squadDao.add(newSquad);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
         //delete All Heroes
         get("/heroes/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
@@ -50,7 +71,7 @@ public class App {
         // form to add new hero
         get("/heroes/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            return new ModelAndView(model, "newhero-fom.hbs");
+            return new ModelAndView(model, "newhero-form.hbs");
         }, new HandlebarsTemplateEngine());
 
        // process form input
