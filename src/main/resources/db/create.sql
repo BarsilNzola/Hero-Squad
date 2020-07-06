@@ -7,7 +7,7 @@ nickname VARCHAR,
 age int,
 power VARCHAR,
 weakness VARCHAR,
-squadid INTEGER
+squadId INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS squads (
@@ -15,4 +15,4 @@ id int PRIMARY KEY auto_increment,
 name VARCHAR,
 cause VARCHAR,
 squadSize int,
-)
+);

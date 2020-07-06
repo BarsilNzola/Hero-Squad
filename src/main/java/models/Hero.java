@@ -36,6 +36,7 @@ public class Hero {
         Hero hero = (Hero) o;
         return age == hero.age &&
                 id == hero.id &&
+                squadId == hero.squadId &&
                 name.equals(hero.name) &&
                 nickname.equals(hero.nickname) &&
                 power.equals(hero.power) &&
@@ -44,7 +45,7 @@ public class Hero {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, nickname, age, power, weakness, id);
+        return Objects.hash(name, nickname, age, power, weakness, id, squadId);
     }
 
     public void setName(String name) {

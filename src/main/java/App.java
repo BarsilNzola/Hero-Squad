@@ -31,7 +31,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //show new squad form
-        get("/squad/new", (request, response) -> {
+        get("/squads/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Squad> squads = squadDao.getAll(); //refresh list of links for navbar
             model.put("squads", squads);
