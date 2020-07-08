@@ -1,0 +1,29 @@
+{{#partial "title" }}
+  HEROES
+{{/partial}}
+
+<!--form.hbs.-->
+{{#partial "content"}}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Heroes</h1>
+
+            {{#if heroes}}
+                {{#each heroes}}
+                <ul>
+                    <li>{{name}} <br> <a href = "/squads/{{squadId}}/heroes/{{id}}">Hero Dossier....</a></li>
+                </ul>
+                <div class="container">
+                </div>
+                {{/each}}
+                <p class="text-muted"><a href="/heroes/delete">REMOVE ALL HEROES</a></p>
+                <p class="text-muted"><a href="/squads/delete">REMOVE ALL SQUADS AND HEROES</a></p>
+            {{else}}
+            <p>No Heroes Enlisted!</p>
+            {{/if}}
+    </div>
+</div>
+{{/partial}}
+
+{{> layout.hbs}}
